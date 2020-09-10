@@ -1,21 +1,29 @@
+const path = require('path');
 const express = require('express');
 
 const app = express();
 
-app.get('', (req, res) => {
-  res.send('Hello World');
-});
-//
-app.get('/help', (req, res) => {
-  res.send('Help Page');
-});
+const publicDirectoryPath = path.join(__dirname, '../public');
 
-app.get('/about', (req, res) => {
-  res.send('About Page');
-});
+app.use(express.static(publicDirectoryPath));
+
+//
+// app.get('/help', (req, res) => {
+//   res.send([
+//     { name: 'Toby', age: 29 },
+//     { name: 'Toby1', age: 30 }
+//   ]);
+// });
+
+// app.get('/about', (req, res) => {
+//   res.send('<h1>About Page</h1>');
+// });
 
 app.get('/weather', (req, res) => {
-  res.send('Weather Page');
+  res.send({
+    location: 'London',
+    forecast: 50
+  });
 });
 
 app.listen(3000, () => {
